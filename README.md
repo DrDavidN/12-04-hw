@@ -84,15 +84,24 @@ spec:
        ports:
         - containerPort: 8080
 ```
-
+![image](https://github.com/DrDavidN/12-04-hw/assets/128225763/1a21d523-eb67-4de4-bd2f-9fec21e59d90)
 
 4. Продемонстрировать доступ с помощью `curl` по доменному имени сервиса.
 
 #### Ответ:
 
+Получаю адрес pod
+![image](https://github.com/DrDavidN/12-04-hw/assets/128225763/d37b0d8c-babc-427b-a480-22bc8f1ee3dc)
+
+Проверяю доступность одной из реплик. Реплика доступна.
+![image](https://github.com/DrDavidN/12-04-hw/assets/128225763/ffd6537d-3f3d-4ea2-9c18-9ad98bbf982f)
+
+
 5. Предоставить манифесты Deployment и Service в решении, а также скриншоты или вывод команды п.4.
 
 #### Ответ:
+
+Предоставлено в предыдуших пунктах.
 
 ------
 
@@ -102,12 +111,38 @@ spec:
 
 #### Ответ:
 
+Создаю файл service-nodeport.yaml, применяю его, проверяю
+``` YAML
+apiVersion: v1
+kind: Service
+metadata:
+  name: nodeport-service
+  namespace: 12-04-hw
+spec:
+  type: NodePort
+  selector:
+    app: nettools
+  ports:
+    - port: 80
+      name: nginx-port
+      targetPort: 80
+      nodePort: 30007
+    - port: 8080
+      name: multitool-port
+      targetPort: 8088
+      nodePort: 30008
+```
+![image](https://github.com/DrDavidN/12-04-hw/assets/128225763/fbf07328-b625-46f5-9bb8-b67520780c9e)
+
 2. Продемонстрировать доступ с помощью браузера или `curl` с локального компьютера.
 
 #### Ответ:
+![image](https://github.com/DrDavidN/12-04-hw/assets/128225763/e4996da7-b55f-41d2-a464-bfdf51488de0)
 
 3. Предоставить манифест и Service в решении, а также скриншоты или вывод команды п.2.
 
 #### Ответ:
+
+Предоставлено в предыдуших пунктах.
 
 ------
